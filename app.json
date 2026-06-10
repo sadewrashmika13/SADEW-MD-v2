@@ -1,0 +1,72 @@
+{
+  "name": "SADEW-MD",
+  "description": "SADEW MD WhatsApp Bot - Heroku Deploy",
+  "repository": "https://github.com/sadew/sadew-md",
+  "logo": "https://res.cloudinary.com/dqlh378fb/image/upload/v1780590033/zanta_media_uploads/dttqjshprca9zvqcpbwg.jpg",
+  "keywords": ["whatsapp", "bot", "sadew-md"],
+  "env": {
+    "SESSION_ID": {
+      "description": "Bot Session ID (sadew&... or base64 creds)",
+      "required": true
+    },
+    "OWNER_NUMBER": {
+      "description": "Owner WhatsApp number with country code (no +)",
+      "value": "94783360267",
+      "required": true
+    },
+    "BOT_NAME": {
+      "description": "Bot display name",
+      "value": "SADEW MD",
+      "required": false
+    },
+    "PREFIX": {
+      "description": "Command prefix",
+      "value": ".",
+      "required": false
+    },
+    "MODE": {
+      "description": "Bot mode: public or private",
+      "value": "public",
+      "required": false
+    },
+    "MONGO_URL": {
+      "description": "MongoDB connection URI",
+      "required": false
+    },
+    "MENU_IMAGE_URL": {
+      "description": "Menu image URL",
+      "value": "https://res.cloudinary.com/dqlh378fb/image/upload/v1780590033/zanta_media_uploads/dttqjshprca9zvqcpbwg.jpg",
+      "required": false
+    },
+    "GROQ_API_KEY": {
+      "description": "Groq AI API key",
+      "required": false
+    },
+    "GEMINI_API_KEY": {
+      "description": "Google Gemini API key",
+      "required": false
+    },
+    "AUTO_STATUS_VIEW": {
+      "description": "Auto view WhatsApp statuses",
+      "value": "true",
+      "required": false
+    },
+    "CALL_BLOCK": {
+      "description": "Block incoming calls",
+      "value": "false",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
