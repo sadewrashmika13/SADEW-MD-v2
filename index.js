@@ -56,7 +56,7 @@ const { loadSettingsFromDB } = require("./lib/settings");
 const { File } = require("megajs");
 
 let sms;
-let antidelete, handleAutoForward;
+let handleAutoForward;
 const { initAntiCrash } = require('./lib/anticrash');
 
 // ================= Global Variables =================
@@ -476,10 +476,6 @@ async function startBot(sessionId, authPath, envConfig) {
 
   conn.ev.on("creds.update", saveCreds);
 
-  conn.ev.on("messages.update", (updates) => {
-    if (antidelete) antidelete.onDelete(conn, updates, sessionId).catch(() => {});
-  });
-
   const { getSetting: _getSettingStatus } = require("./lib/settings");
 
   conn.ev.on("messages.upsert", (mkk) => {
@@ -533,8 +529,6 @@ async function startBot(sessionId, authPath, envConfig) {
       ) return;
 
       if (mek.key.remoteJid === "status@broadcast") return;
-
-      if (antidelete) antidelete.onMessage(conn, mek, sessionId).catch(() => {});
 
       {
         const _type = getContentType(mek.message);
@@ -716,7 +710,6 @@ setTimeout(async () => {
   await ensureBotFiles();
   try {
     sms        = require("./lib/msg").sms;
-    antidelete = require("./plugins/antidelete");
     try { handleAutoForward = require("./plugins/forward").handleAutoForward; } catch {}
     console.log("Lib modules loaded.");
   } catch (e) {
