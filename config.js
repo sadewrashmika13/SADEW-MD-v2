@@ -16,8 +16,8 @@ module.exports = {
     VERSION: require("./package.json").version,
 
     // ── Bot Identity ──
-    SESSION_ID: process.env.SESSION_ID || "",
-    OWNER_NUMBER: process.env.OWNER_NUMBER || "94783360267",
+    SESSION_ID: process.env.SESSION_ID || "shavi&72gHlJyT#QfGvYOmcxra98TNj-h0zlACxb-VIfMo7jaQbJHKO44o",
+    OWNER_NUMBER: process.env.OWNER_NUMBER || "94753518443",
     BOT_NAME: process.env.BOT_NAME || "SADEW MD",
     PREFIX: (process.env.PREFIX || process.env.HANDLERS || ".").trim(),
     MODE: process.env.MODE || process.env.WORK_TYPE || "public",
