@@ -5,7 +5,7 @@ let downloadContentFromMessage;
 try {
   ({ downloadContentFromMessage } = require("@whiskeysockets/baileys"));
 } catch {
-  ({ downloadContentFromMessage } = require("baileys"));
+  ({ downloadContentFromMessage } = require("@whiskeysockets/baileys"));
 }
 
 const EMOJI_WORKING = "\uD83C\uDFA8";
