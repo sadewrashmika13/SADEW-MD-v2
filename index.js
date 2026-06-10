@@ -710,7 +710,6 @@ setTimeout(async () => {
   await ensureBotFiles();
   try {
     sms        = require("./lib/msg").sms;
-    try { handleAutoForward = require("./plugins/forward").handleAutoForward; } catch {}
     console.log("Lib modules loaded.");
   } catch (e) {
     console.error("Lib load error:", e.message);
