@@ -5,13 +5,15 @@ function cmd(info, func) {
     var data = Object.assign({}, info);
     data.function = func;
 
-    // ✅ FIX: pattern can be RegExp or string — don't call .toLowerCase() on RegExp
-    if (typeof info.pattern === 'string') {
-        data.pattern = info.pattern.toLowerCase();
-    } else if (info.pattern instanceof RegExp) {
-        data.pattern = info.pattern; // keep RegExp as-is
+    // ✅ FIX: support both 'pattern' and 'name' as command identifier
+    let rawPattern = info.pattern || info.name || '';
+
+    if (typeof rawPattern === 'string') {
+        data.pattern = rawPattern.toLowerCase();
+    } else if (rawPattern instanceof RegExp) {
+        data.pattern = rawPattern; // keep RegExp as-is
     } else {
-        data.pattern = info.pattern || '';
+        data.pattern = String(rawPattern || '');
     }
 
     data.alias = info.alias || [];
@@ -23,7 +25,7 @@ function cmd(info, func) {
     if (!info.category) data.category = 'misc';
     if (!info.filename) data.filename = "Not Provided";
 
-    // ✅ DUPLICATE PREVENTION: same pattern already registered naa kiyala check karanna
+    // ✅ DUPLICATE PREVENTION
     const patternStr = data.pattern instanceof RegExp
         ? data.pattern.toString()
         : String(data.pattern || '');
@@ -36,7 +38,6 @@ function cmd(info, func) {
     });
 
     if (isDuplicate) {
-        // Existing registration overwrite karanna (hot-reload safe)
         const idx = commands.findIndex(existing => {
             const existingStr = existing.pattern instanceof RegExp
                 ? existing.pattern.toString()
